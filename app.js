@@ -1,8 +1,37 @@
 $(document).ready(function () {
   var timeInt = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+  var timeArray = [
+    "9am",
+    "10am",
+    "11am",
+    "12nn",
+    "1pm",
+    "2pm",
+    "3pm",
+    "4pm",
+    "5pm",
+  ];
 
   var time = moment().format("h a");
   var currentTimeInt = moment().hour();
+
+  for (let i = 0; i < timeInt.length; i++) {
+    $("#container").append(`<div data-id="${i}" id="timeBlock${i}" class="row">
+    <div class="hour">
+      &nbsp;&nbsp;&nbsp;&nbsp;${timeArray[i]}&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    <textarea
+      class="row"
+      name=""
+      id="slot"
+      cols="110"
+      rows="5"
+    ></textarea>
+    <div id ="submit" class="saveBtn">
+      <i class="fas fa-save"></i>
+    </div>
+  </div>`);
+  }
 
   //not completely working yet, need to make sure colors are right
   for (let i = 0; i < timeInt.length; i++) {
