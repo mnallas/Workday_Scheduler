@@ -3,7 +3,6 @@ $(document).ready(function () {
 
   var time = moment().format("h a");
   var currentTimeInt = moment().hour();
-  var text = window.localStorage.getItem("todos");
 
   //not completely working yet, need to make sure colors are right
   for (let i = 0; i < timeInt.length; i++) {
@@ -12,37 +11,40 @@ $(document).ready(function () {
         .children()
         .siblings("#slot")
         .attr("class", "future row");
-      $(`#timeBlock${i}`).children().siblings("#slot").val(text);
+      $(`#timeBlock${i}`).children().siblings("#slot").val();
     } else if (timeInt[i] === currentTimeInt) {
       $(`#timeBlock${i}`)
         .children()
         .siblings("#slot")
         .attr("class", "present row");
-      $(`#timeBlock${i}`).children().siblings("#slot").val(text);
+      $(`#timeBlock${i}`).children().siblings("#slot").val();
     } else {
       $(`#timeBlock${i}`)
         .children()
         .siblings("#slot")
         .attr("class", "past row");
-      $(`#timeBlock${i}`).children().siblings("#slot").val(text);
+      $(`#timeBlock${i}`).children().siblings("#slot").val();
     }
   }
-
-  saveButton($("#saveBtn0"));
-
-  //need to save to localstorage and leave displayed on each timeslot
-  function saveButton(btn) {
-    $(document).on("click", "#submit", function (e) {
-      e.preventDefault();
-
-      userInput = $(this).parent().children().siblings("#slot").val();
-      console.log(userInput);
-      console.log($(this).parent().attr("data-id"));
-
-      localStorage.setItem(
-        `timeBlock:${$(this).parent().attr("data-id")}`,
-        userInput
-      );
-    });
+  for (let i = 0; i < timeInt.length; i++) {
+    console.log(
+      $(`#timeBlock${i}`)
+        .children()
+        .siblings("#slot")
+        .val(localStorage.getItem(`timeBlock:${i}`))
+    );
   }
+
+  $(document).on("click", "#submit", function (e) {
+    e.preventDefault();
+
+    userInput = $(this).parent().children().siblings("#slot").val();
+    console.log(userInput);
+    console.log($(this).parent().attr("data-id"));
+
+    localStorage.setItem(
+      `timeBlock:${$(this).parent().attr("data-id")}`,
+      userInput
+    );
+  });
 });
