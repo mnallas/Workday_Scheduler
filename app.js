@@ -64,6 +64,11 @@ $(document).ready(function () {
     );
   }
 
+  $("#reset").on("click", function () {
+    localStorage.clear();
+    location.reload();
+  });
+
   $(document).on("click", "#submit", function (e) {
     e.preventDefault();
 
