@@ -28,7 +28,7 @@ $(document).ready(function () {
       rows="5"
     ></textarea>
     <div id ="submit" class="saveBtn">
-      <i class="fas fa-save"></i>
+      <i class="fas fa-save">       </i>
     </div>
   </div>`);
   }
